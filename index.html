@@ -1,1 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Child Club Program Registration</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                linear-gradient(rgba(20, 30, 70, 0.65), rgba(20, 30, 70, 0.65)),
+                url("https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=2000&q=80");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 40px 15px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            text-align: center;
+            padding: 35px 25px;
+        }
+
+        .header h1 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 15px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .form-area {
+            padding: 35px;
+        }
+
+        .section-title {
+            color: #4f46e5;
+            font-size: 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid #7c3aed;
+            padding-left: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .required {
+            color: #e11d48;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 13px 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+            transition: 0.25s;
+            background: #fff;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .performance-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .performance-option {
+            border: 1px solid #ddd;
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .performance-option:hover {
+            border-color: #6366f1;
+            background: #f5f3ff;
+        }
+
+        .performance-option input {
+            width: auto;
+            margin-right: 8px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .note {
+            font-size: 13px;
+            color: #666;
+            margin-top: 7px;
+        }
+
+        .success {
+            display: none;
+            text-align: center;
+            padding: 35px;
+        }
+
+        .success-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        .success h2 {
+            color: #16a34a;
+            margin-bottom: 10px;
+        }
+
+        .success p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #f8f7ff;
+            color: #666;
+            font-size: 13px;
+        }
+
+        @media (max-width: 650px) {
+
+            .row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .performance-options {
+                grid-template-columns: 1fr;
+            }
+
+            .form-area {
+                padding: 25px 20px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>Child Club Program Registration</h1>
+
+        <p>
+            Register your group and share your ideas for the upcoming
+            Child Club program.
+        </p>
+    </div>
+
+
+    <div class="form-area" id="formArea">
+
+        <form id="programForm">
+
+            <h2 class="section-title">Group Information</h2>
+
+            <!-- NAME -->
+            <div class="form-group">
+                <label>
+                    Name of Representative <span class="required">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Enter representative's full name"
+                    required
+                >
+            </div>
+
+
+            <div class="row">
+
+                <!-- TOLE -->
+                <div class="form-group">
+                    <label>
+                        Tole <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        name="tole"
+                        placeholder="Enter your Tole"
+                        required
+                    >
+                </div>
+
+
+                <!-- GROUP NAME -->
+                <div class="form-group">
+                    <label>
+                        Group Name <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        name="groupName"
+                        placeholder="Enter group name"
+                        required
+                    >
+                </div>
+
+            </div>
+
+
+            <div class="row">
+
+                <!-- MEMBERS -->
+                <div class="form-group">
+
+                    <label>
+                        Number of Members <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="number"
+                        name="members"
+                        min="1"
+                        placeholder="e.g. 8"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- AGE GROUP -->
+                <div class="form-group">
+
+                    <label>
+                        Age Group
+                    </label>
+
+                    <select name="ageGroup">
+
+                        <option value="">Select age group</option>
+
+                        <option>Under 10</option>
+                        <option>10–12</option>
+                        <option>13–15</option>
+                        <option>16–18</option>
+                        <option>Mixed Age Group</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <h2 class="section-title">Performance Details</h2>
+
+
+            <!-- PERFORMANCE -->
+            <div class="form-group">
+
+                <label>
+                    Type of Performance <span class="required">*</span>
+                </label>
+
+                <div class="performance-options">
+
+                    <label class="performance-option">
+                        <input
+                            type="radio"
+                            name="performance"
+                            value="Dance"
+                            required
+                        >
+                        Dance
+                    </label>
+
+                    <label class="performance-option">
+                        <input
+                            type="radio"
+                            name="performance"
+                            value="Drama"
+                        >
+                        Drama
+                    </label>
+
+                    <label class="performance-option">
+                        <input
+                            type="radio"
+                            name="performance"
+                            value="Song / Music"
+                        >
+                        Song / Music
+                    </label>
+
+                    <label class="performance-option">
+                        <input
+                            type="radio"
+                            name="performance"
+                            value="Poetry"
+                        >
+                        Poetry
+                    </label>
+
+                    <label class="performance-option">
+                        <input
+                            type="radio"
+                            name="performance"
+                            value="Speech"
+                        >
+                        Speech
+                    </label>
+
+                    <label class="performance-option">
+                        <input
+                            type="radio"
+                            name="performance"
+                            value="Other"
+                        >
+                        Other
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- DURATION -->
+            <div class="form-group">
+
+                <label>
+                    Expected Performance Duration
+                </label>
+
+                <select name="duration">
+
+                    <option value="">Select duration</option>
+                    <option>Under 3 minutes</option>
+                    <option>3–5 minutes</option>
+                    <option>5–10 minutes</option>
+                    <option>More than 10 minutes</option>
+
+                </select>
+
+            </div>
+
+
+            <!-- CONTACT -->
+            <h2 class="section-title">Contact Information</h2>
+
+
+            <div class="row">
+
+                <div class="form-group">
+
+                    <label>
+                        Contact Number <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="tel"
+                        name="phone"
+                        placeholder="98XXXXXXXX"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Contact Email
+                    </label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="example@gmail.com"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- IDEAS -->
+            <div class="form-group">
+
+                <label>
+                    Any Other Ideas for the Program?
+                </label>
+
+                <textarea
+                    name="ideas"
+                    placeholder="Share your suggestions, ideas or activities you would like to see in the program..."
+                ></textarea>
+
+            </div>
+
+
+            <!-- SPECIAL REQUIREMENTS -->
+            <div class="form-group">
+
+                <label>
+                    Special Requirements
+                </label>
+
+                <textarea
+                    name="requirements"
+                    placeholder="E.g. microphone, music system, projector, space requirements, etc."
+                ></textarea>
+
+            </div>
+
+
+            <!-- CONFIRMATION -->
+            <div class="form-group">
+
+                <label class="performance-option">
+
+                    <input
+                        type="checkbox"
+                        name="confirmation"
+                        required
+                    >
+
+                    I confirm that the information provided above is correct.
+
+                </label>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit-btn"
+                id="submitBtn"
+            >
+                Submit Registration
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- SUCCESS MESSAGE -->
+
+    <div class="success" id="successMessage">
+
+        <div class="success-icon">✓</div>
+
+        <h2>Registration Submitted!</h2>
+
+        <p>
+            Thank you for registering your group.
+            Your information has been successfully submitted.
+        </p>
+
+    </div>
+
+
+    <div class="footer">
+
+        Child Club • Empowering Children • Building a Better Community
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /*
+       IMPORTANT:
+       Replace the URL below with your Google Apps Script
+       Web App URL.
+    */
+
+    const scriptURL =
+        "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL";
+
+
+    const form =
+        document.getElementById("programForm");
+
+
+    const submitBtn =
+        document.getElementById("submitBtn");
+
+
+    const formArea =
+        document.getElementById("formArea");
+
+
+    const successMessage =
+        document.getElementById("successMessage");
+
+
+    form.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+
+        submitBtn.disabled = true;
+
+        submitBtn.innerText = "Submitting...";
+
+
+        const formData =
+            new FormData(form);
+
+
+        fetch(scriptURL, {
+
+            method: "POST",
+
+            body: formData
+
+        })
+
+        .then(response => response.text())
+
+        .then(data => {
+
+            formArea.style.display = "none";
+
+            successMessage.style.display = "block";
+
+        })
+
+        .catch(error => {
+
+            console.error(error);
+
+            alert(
+                "Something went wrong. Please try again."
+            );
+
+            submitBtn.disabled = false;
+
+            submitBtn.innerText =
+                "Submit Registration";
+
+        });
+
+    });
+
+</script>
+
+</body>
+</html>
